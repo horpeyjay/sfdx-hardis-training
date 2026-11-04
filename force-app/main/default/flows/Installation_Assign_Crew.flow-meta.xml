@@ -6,8 +6,8 @@
         <description>A planned installation with a crew and a date is scheduled: the status follows the facts rather than waiting for somebody to change it.</description>
         <name>Move_To_Scheduled</name>
         <label>Move To Scheduled</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
         <assignmentItems>
             <assignToReference>$Record.Status__c</assignToReference>
             <operator>Assign</operator>
@@ -67,21 +67,9 @@
     <environments>Default</environments>
     <interviewLabel>Installation Assign Crew {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Installation Assign Crew</label>
-    <processMetadataValues>
-        <name>BuilderType</name>
-        <value>
-            <stringValue>LightningFlowBuilder</stringValue>
-        </value>
-    </processMetadataValues>
-    <processMetadataValues>
-        <name>CanvasMode</name>
-        <value>
-            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
-        </value>
-    </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <start>
-        <locationX>0</locationX>
+        <locationX>50</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Move_To_Scheduled</targetReference>
