@@ -1,0 +1,16 @@
+{
+  "sfdxHardisLabel": "Handover Item Upsert",
+  "sfdxHardisDescription": "upsert handover items into the org",
+  "objects": [
+    {
+      "query": "Select External_Id__c, Is_Done__c, Is_Template__c, Label__c, Sequence__c From Handover_Item__c ",
+      "operation": "Upsert",
+      "externalId": " External_Id__c",
+      "master": true,
+      "deleteOldData": false,
+      "useQueryAll": false,
+      "allOrNone": true,
+      "updateWithMockData": false
+    }
+  ]
+}

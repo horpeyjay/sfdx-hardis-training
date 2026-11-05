@@ -1,0 +1,9 @@
+commandsPostDeploy:
+  - id: 31d119db-7bdc-4028-b4dd-f3651bade759
+    label: HandoverItemAction
+    type: data
+    command: ""
+    parameters:
+      sfdmuProject: HandoverItemData
+    runOnlyOnceByOrg: true
+    context: process-deployment-only
