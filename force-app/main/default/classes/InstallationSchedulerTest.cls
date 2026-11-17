@@ -18,6 +18,7 @@ private class InstallationSchedulerTest {
         // Still waiting for a date, so the Installation Assign Crew flow leaves
         // it alone and it stays Planned. The record above does not: that flow
         // moves any Planned installation with a crew and a date to Scheduled.
+        //
         insert new Installation__c(
             Status__c = 'Planned',
             Crew_Size__c = 2,
