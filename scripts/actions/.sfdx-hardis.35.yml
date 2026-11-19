@@ -1,0 +1,9 @@
+commandsPostDeploy:
+  - id: bd07cba3-9031-48eb-8a91-3b7b0264d2a9
+    label: HandOver Item Upsert
+    type: data
+    command: ""
+    parameters:
+      sfdmuProject: HandOverItemData
+    runOnlyOnceByOrg: true
+    context: process-deployment-only
