@@ -57,7 +57,7 @@ public with sharing class InstallationScheduler {
      * @param wanted the day the planner wants
      * @return the ids that can take a crew that day
      */
-    public static List<Id> schedulableOn(List<Id> installationIds, Date wanted) {
+        public static List<Id> schedulableOn(List<Id> installationIds, Date wanted) {
         Map<Id, Date> latestArrival = new Map<Id, Date>();
         for (Panel_Batch__c batch : [
             SELECT Installation__c, Arrival_Date__c
