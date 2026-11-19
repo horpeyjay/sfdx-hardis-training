@@ -16,6 +16,22 @@
             </value>
         </assignmentItems>
         <connector>
+            <targetReference>Flat_Roof_Minimum</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Raise_Crew_To_Three</name>
+        <label>Raise Crew To Three</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Crew_Size__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>3.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
             <targetReference>Crew_Over_Cap</targetReference>
         </connector>
     </assignments>
@@ -33,7 +49,69 @@
             </value>
         </assignmentItems>
     </assignments>
-    <description>When a planner puts a crew on a planned installation that already has a date, the installation moves to Scheduled on its own.</description>
+    <decisions>
+        <name>Flat_Roof_Minimum</name>
+        <label>Flat Roof Minimum</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Crew_Over_Cap</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Crew is enough</defaultConnectorLabel>
+        <rules>
+            <name>Too_small_for_a_flat_roof</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Roof_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Flat</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Crew_Size__c</leftValueReference>
+                <operator>LessThan</operator>
+                <rightValue>
+                    <numberValue>3.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Raise_Crew_To_Three</targetReference>
+            </connector>
+            <label>Too small for a flat roof</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Is the crew larger than the cap this installation allows?</description>
+        <name>Crew_Over_Cap</name>
+        <label>Crew Over Cap</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Within the cap</defaultConnectorLabel>
+        <rules>
+            <name>Too_Large</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Crew_Capacity_Cap__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Crew_Size__c</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <elementReference>$Record.Crew_Capacity_Cap__c</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Bring_Crew_Back_To_Cap</targetReference>
+            </connector>
+            <label>Too large for this installation</label>
+        </rules>
+    </decisions>
+    <description>When a planner puts a crew on a planned installation that already has a date, the installation moves to Scheduled on its own. A flat roof needs a crew of at least three, and a crew larger than the installation cap is brought back down to the cap: too many people on a small roof is a safety problem, so the cap has the last word.</description>
     <environments>Default</environments>
     <interviewLabel>Installation Assign Crew {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Installation Assign Crew</label>
